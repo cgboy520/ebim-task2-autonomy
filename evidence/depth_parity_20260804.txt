@@ -1,0 +1,19 @@
+depth-vs-GT pad geometry parity — 2026-08-04, fresh L4 rig (GCP), barebone
+scene @ eval-fix-preview generation, driver 580.173.02, isaac-sim 5.1.0.
+Probe: evidence/depth_parity_probe.py 10 (runner A/B definitions: GT centroid
+= mean of pad_points vertices, GT z_top = its 99th percentile; depth side =
+perception.estimate_pad_geometry_from_depth with the shipped barebone camera
+constants). Start configuration (strip at rest on the tray), 10 frames:
+
+sample 1..10 (identical to the 0.1 mm):
+  d_xy = (-2.1, +1.1) mm   d_ztop = +0.0 mm   z_bot = 0.0170   px = 926
+
+n=10  |d_xy| mean = 2.3 mm (max 2.3)   d_ztop mean = +0.0 mm (sd 0.0)
+
+Reading: on the start configuration the depth path reproduces the GT feed's
+centroid within a CONSTANT 2.3 mm (a calibration-level bias, zero frame
+noise) and the crest height exactly. Scope limit that keeps `gt` the shipped
+default: mid-chain the GT feed reports the hanging strip THROUGH the gripper
+occlusion (anchor_swing consumes raw vertex extents for grip and hang);
+a top-down depth camera cannot, so the full replacement is an
+occlusion-robustness problem, not a source swap.

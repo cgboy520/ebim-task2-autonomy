@@ -1,0 +1,11 @@
+iter	case	predicted	official	reset_rc	snapshot
+1	both_thermalpad_dominant	0.7268	0	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_061823_502111.json
+2	both_liner_dominant	0.2037	0.19568345323741007	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_062538_936813.json
+3	sideways	0.0000	0	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_063318_242953.json
+4	both_thermalpad_dominant	0.7636	0	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_064057_374356.json
+5	aborted	-	0	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_064624_410082.json
+6	aborted	-	0	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_065018_628002.json
+7	sideways	0.0000	0	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_065757_456947.json
+8	both_thermalpad_dominant	0.5154	0	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_070457_864681.json
+9	liner_only	0.8020	0.7991803278688525	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_071148_457229.json
+10	both_liner_dominant	0.5275	0.5222222222222223	0	/root/docker/ebim-challenge/eval-task2/evaluate/eval_camera_iou_20260803_071915_852397.json

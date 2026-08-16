@@ -1,0 +1,57 @@
+snapshots examined : 230
+usable rows        : 224
+   skipped: replica: no id source: 6
+
+======================================================================
+== INFERRED ids (production path): n=79
+  replica \ official      both_liner_dominant  both_thermalpad_domina                sideways         thermalpad_only
+both_liner_dominant                        67                       2                       0                       0
+sideways                                    3                       2                       3                       2
+  exact case agreement : 70/79 (88.6%)
+  gate agreement (>0)  : 77/79 (97.5%)
+  replica ZERO / official SCORED : 0  (lays thrown away)
+  replica SCORED / official ZERO : 2  (false accepts)
+     official cases [('both_thermalpad_dominant', 2)]
+     replica IoUs min 0.0184 max 0.0994
+  both scored (n=1): mean official-minus-replica -0.4560, max |err| 0.4560
+     20260801_004854_315170  replica 1.0000 official 0.5440  (both_liner_dominant / both_liner_dominant)
+
+======================================================================
+== PAYLOAD ids (evaluator's own map): n=222
+  replica \ official           both_liner_dominant  both_thermalpad_domina              liner_only                sideways
+both_liner_dominant                            124                       0                       0                       0
+both_thermalpad_dominant                         0                      21                       0                       0
+liner_only                                       0                       0                      21                       0
+sideways                                         0                       0                       0                      56
+  exact case agreement : 222/222 (100.0%)
+  gate agreement (>0)  : 222/222 (100.0%)
+  replica ZERO / official SCORED : 0  (lays thrown away)
+  replica SCORED / official ZERO : 0  (false accepts)
+  both scored (n=75): mean official-minus-replica -0.0079, max |err| 0.1406
+     20260801_085328_792326  replica 0.6656 official 0.5250  (both_liner_dominant / both_liner_dominant)
+     20260802_104414_666105  replica 0.2748 official 0.2581  (both_liner_dominant / both_liner_dominant)
+     20260731_220049_974770  replica 0.3859 official 0.3704  (both_liner_dominant / both_liner_dominant)
+     20260802_043707_557932  replica 0.3152 official 0.3005  (both_liner_dominant / both_liner_dominant)
+
+======================================================================
+== NEW production path (payload, else geometry): n=224
+  replica \ official           both_liner_dominant  both_thermalpad_domina              liner_only                sideways         thermalpad_only
+both_liner_dominant                            124                       0                       0                       0                       0
+both_thermalpad_dominant                         0                      21                       0                       0                       0
+liner_only                                       0                       0                      21                       0                       0
+sideways                                         0                       0                       0                      56                       2
+  exact case agreement : 222/224 (99.1%)
+  gate agreement (>0)  : 224/224 (100.0%)
+  replica ZERO / official SCORED : 0  (lays thrown away)
+  replica SCORED / official ZERO : 0  (false accepts)
+  both scored (n=75): mean official-minus-replica -0.0079, max |err| 0.1406
+     20260801_085328_792326  replica 0.6656 official 0.5250  (both_liner_dominant / both_liner_dominant)
+     20260802_104414_666105  replica 0.2748 official 0.2581  (both_liner_dominant / both_liner_dominant)
+     20260731_220049_974770  replica 0.3859 official 0.3704  (both_liner_dominant / both_liner_dominant)
+     20260802_043707_557932  replica 0.3152 official 0.3005  (both_liner_dominant / both_liner_dominant)
+
+== evaluator regime (does the LIVE semantic map still name 'thermalpad'?) ==
+   sem_has_thermalpad=True: n=203  official scored>0 54/203 (26.6%)
+      official cases: [('both_liner_dominant', 124), ('sideways', 56), ('both_thermalpad_dominant', 21), ('thermalpad_only', 2)]
+   sem_has_thermalpad=False: n=21  official scored>0 21/21 (100.0%)
+      official cases: [('liner_only', 21)]

@@ -1,0 +1,51 @@
++ cd /home/ubuntu/bench
++ echo '=== verdict under eval-fix-preview (PR#59 semantics) ==='
+=== verdict under eval-fix-preview (PR#59 semantics) ===
++ call_eval
++ for i in 1 2 3
+++ docker exec eval_task2 bash -lc 'source /opt/ros/jazzy/setup.bash && timeout 30 python3 /workspace/scripts/evaluation/task2/client.py'
+++ tail -1
++ out='Saved [/output/evaluate/eval_camera_rgb_20260804_033152_655375.jpg, /output/evaluate/eval_camera_depth_20260804_033152_655375.npy, /output/evaluate/eval_camera_depth_20260804_033152_655375.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033152_655375.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033152_655375.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_bbox_tight_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_bbox_loose_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_iou_20260804_033152_655375.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033152_655375.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033152_655375.jpg, /output/evaluate/eval_camera_bbox2d_loose_20260804_033152_655375.json, /output/evaluate/eval_camera_rgb_bbox2d_loose_20260804_033152_655375.jpg] frame_id=eval_camera eval_iou=0.7852 orientation=correct[liner_only]'
++ echo 'Saved [/output/evaluate/eval_camera_rgb_20260804_033152_655375.jpg, /output/evaluate/eval_camera_depth_20260804_033152_655375.npy, /output/evaluate/eval_camera_depth_20260804_033152_655375.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033152_655375.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033152_655375.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_bbox_tight_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_bbox_loose_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_iou_20260804_033152_655375.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033152_655375.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033152_655375.jpg, /output/evaluate/eval_camera_bbox2d_loose_20260804_033152_655375.json, /output/evaluate/eval_camera_rgb_bbox2d_loose_20260804_033152_655375.jpg] frame_id=eval_camera eval_iou=0.7852 orientation=correct[liner_only]'
+Saved [/output/evaluate/eval_camera_rgb_20260804_033152_655375.jpg, /output/evaluate/eval_camera_depth_20260804_033152_655375.npy, /output/evaluate/eval_camera_depth_20260804_033152_655375.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033152_655375.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033152_655375.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_bbox_tight_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_bbox_loose_labels_20260804_033152_655375.txt, /output/evaluate/eval_camera_iou_20260804_033152_655375.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033152_655375.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033152_655375.jpg, /output/evaluate/eval_camera_bbox2d_loose_20260804_033152_655375.json, /output/evaluate/eval_camera_rgb_bbox2d_loose_20260804_033152_655375.jpg] frame_id=eval_camera eval_iou=0.7852 orientation=correct[liner_only]
++ grep -q 'eval_iou\|Evaluation\|No image'
++ grep -q eval_iou
++ return 0
++ echo '=== switching evaluator to origin/main semantics ==='
+=== switching evaluator to origin/main semantics ===
++ git checkout -q main
++ git log --oneline -1
+e8c6235 Improve Task 1 GELLO teleop and Newton cable integration (#44)
++ docker restart eval_task2
+eval_task2
++ sleep 15
++ call_eval
++ for i in 1 2 3
+++ docker exec eval_task2 bash -lc 'source /opt/ros/jazzy/setup.bash && timeout 30 python3 /workspace/scripts/evaluation/task2/client.py'
+++ tail -1
++ out='Saved [/output/evaluate/eval_camera_rgb_20260804_033209_471109.jpg, /output/evaluate/eval_camera_depth_20260804_033209_471109.npy, /output/evaluate/eval_camera_depth_20260804_033209_471109.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033209_471109.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033209_471109.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033209_471109.txt, /output/evaluate/eval_camera_iou_20260804_033209_471109.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033209_471109.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033209_471109.jpg] frame_id=eval_camera eval_iou=0.0000 orientation=wrong[no_target_bbox]'
++ echo 'Saved [/output/evaluate/eval_camera_rgb_20260804_033209_471109.jpg, /output/evaluate/eval_camera_depth_20260804_033209_471109.npy, /output/evaluate/eval_camera_depth_20260804_033209_471109.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033209_471109.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033209_471109.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033209_471109.txt, /output/evaluate/eval_camera_iou_20260804_033209_471109.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033209_471109.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033209_471109.jpg] frame_id=eval_camera eval_iou=0.0000 orientation=wrong[no_target_bbox]'
+Saved [/output/evaluate/eval_camera_rgb_20260804_033209_471109.jpg, /output/evaluate/eval_camera_depth_20260804_033209_471109.npy, /output/evaluate/eval_camera_depth_20260804_033209_471109.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033209_471109.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033209_471109.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033209_471109.txt, /output/evaluate/eval_camera_iou_20260804_033209_471109.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033209_471109.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033209_471109.jpg] frame_id=eval_camera eval_iou=0.0000 orientation=wrong[no_target_bbox]
++ grep -q 'eval_iou\|Evaluation\|No image'
++ grep -q eval_iou
++ return 0
++ echo '=== restoring eval-fix-preview ==='
+=== restoring eval-fix-preview ===
++ git checkout -q eval-fix-preview
++ git log --oneline -1
+9ac717b fix(task2): resolve eval target bbox through new loose-bbox stream
++ docker restart eval_task2
+eval_task2
++ sleep 15
++ call_eval
++ for i in 1 2 3
+++ docker exec eval_task2 bash -lc 'source /opt/ros/jazzy/setup.bash && timeout 30 python3 /workspace/scripts/evaluation/task2/client.py'
+++ tail -1
++ out='Saved [/output/evaluate/eval_camera_rgb_20260804_033226_140817.jpg, /output/evaluate/eval_camera_depth_20260804_033226_140817.npy, /output/evaluate/eval_camera_depth_20260804_033226_140817.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033226_140817.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033226_140817.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_bbox_tight_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_bbox_loose_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_iou_20260804_033226_140817.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033226_140817.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033226_140817.jpg, /output/evaluate/eval_camera_bbox2d_loose_20260804_033226_140817.json, /output/evaluate/eval_camera_rgb_bbox2d_loose_20260804_033226_140817.jpg] frame_id=eval_camera eval_iou=0.7852 orientation=correct[liner_only]'
++ echo 'Saved [/output/evaluate/eval_camera_rgb_20260804_033226_140817.jpg, /output/evaluate/eval_camera_depth_20260804_033226_140817.npy, /output/evaluate/eval_camera_depth_20260804_033226_140817.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033226_140817.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033226_140817.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_bbox_tight_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_bbox_loose_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_iou_20260804_033226_140817.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033226_140817.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033226_140817.jpg, /output/evaluate/eval_camera_bbox2d_loose_20260804_033226_140817.json, /output/evaluate/eval_camera_rgb_bbox2d_loose_20260804_033226_140817.jpg] frame_id=eval_camera eval_iou=0.7852 orientation=correct[liner_only]'
+Saved [/output/evaluate/eval_camera_rgb_20260804_033226_140817.jpg, /output/evaluate/eval_camera_depth_20260804_033226_140817.npy, /output/evaluate/eval_camera_depth_20260804_033226_140817.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033226_140817.png, /output/evaluate/eval_camera_semantic_segmentation_20260804_033226_140817.npy, /output/evaluate/eval_camera_semantic_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_bbox_tight_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_bbox_loose_labels_20260804_033226_140817.txt, /output/evaluate/eval_camera_iou_20260804_033226_140817.json, /output/evaluate/eval_camera_bbox2d_tight_20260804_033226_140817.json, /output/evaluate/eval_camera_rgb_bbox2d_tight_20260804_033226_140817.jpg, /output/evaluate/eval_camera_bbox2d_loose_20260804_033226_140817.json, /output/evaluate/eval_camera_rgb_bbox2d_loose_20260804_033226_140817.jpg] frame_id=eval_camera eval_iou=0.7852 orientation=correct[liner_only]
++ grep -q 'eval_iou\|Evaluation\|No image'
++ grep -q eval_iou
++ return 0
++ echo AB_DONE
+AB_DONE

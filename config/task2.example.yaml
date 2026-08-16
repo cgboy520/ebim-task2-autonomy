@@ -1,0 +1,74 @@
+# EBiM Task 2 example config.
+#
+# control.enabled defaults to false: the node observes but does NOT publish until
+# you have calibrated safe_joint_limits_rad and the five waypoints from a real
+# Task 2 scene. Copy to config/task2.local.yaml and fill in real values.
+control:
+  enabled: false
+  active_arm: right              # left | right
+  publish_rate_hz: 10.0
+  joint_tolerance_rad: 0.035
+  waypoint_timeout_s: 12.0
+  verification_timeout_s: 6.0
+  max_episode_s: 180.0
+  safe_joint_limits_rad: []      # REQUIRED when enabled: 7x [min, max]
+
+topics:
+  # Direct, exclusive-control command topics (ebim-benchmark
+  # task2_isaacsim/config/topics.yaml).
+  arm_state: /isaac/right_joint_states
+  arm_command: /isaac/right_joint_commands
+  gripper_command: /isaac/right_robotiq_joint_commands
+  semantic_image: /isaac/eval_camera/semantic_segmentation
+
+semantic_ids:
+  thermalpad: 3
+  target: 4
+  liner: 5
+
+success_gate:
+  min_iou: 0.85
+  liner_dominance_ratio: 0.90
+
+# Semantic-camera pixel -> workspace mapping used by the `perception` policy.
+# pixel_scale is pixels-per-metre at the table plane and MUST be calibrated on
+# the rig; (cx, cy) is the principal point; origin_* shifts the workspace
+# origin in metres. The eval camera is 1280x720 => cx ~ 640, cy ~ 360. It is a
+# static top-down camera with zero rotation, so image +v maps to world -Y:
+# set flip_y: true on the rig. Defaults shown (placeholders for offline use).
+# camera:
+#   cx: 320.0
+#   cy: 240.0
+#   pixel_scale: 1000.0
+#   origin_x_m: 0.0
+#   origin_y_m: 0.0
+#   flip_y: false
+
+# Robotiq driver-joint semantics on the EBiM contract: 0.0 rad = open,
+# 0.8 rad = closed. The policy speaks open-fraction; the runner maps to rad.
+# gripper:
+#   open_rad: 0.0
+#   closed_rad: 0.8
+
+# Cartesian heights for the `perception` policy (metres). With arm-base
+# calibration installed these are WORLD-frame z values (table plane 0.75).
+# policy:
+#   grasp_height_m: 0.02
+#   clearance_height_m: 0.18
+
+# Runtime arm-base self-calibration from /isaac/{arm}_ee_pose (60 Hz):
+# T_world_armbase ≈ T_world_ee x inv(FK(q)), averaged over `samples`
+# stationary samples; a translation spread above max_translation_spread_m
+# logs an error (rigid mount => spread should be << 1 cm).
+# calibration:
+#   enabled: true
+#   samples: 20
+#   max_translation_spread_m: 0.02
+
+# The five fixed-waypoint joint vectors (7 joints each). Empty while disabled.
+waypoints:
+  pregrasp: []
+  grasp: []
+  lift: []
+  preplace: []
+  place: []

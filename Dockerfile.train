@@ -1,0 +1,32 @@
+# GPU training environment for EBiM Task 2 demo fine-tuning (SmolVLA / ACT).
+#
+# lerobot 0.6.0 / torch 2.11 on CUDA wheels. The CUDA wheels bundle their
+# own nvidia-* runtime libraries; the host needs only the driver (no CUDA
+# toolkit install).
+FROM ros:jazzy-ros-base
+
+# cu126 targets sm_89 GPUs; sm_120 (Blackwell) requires the cu130 wheels:
+# build with --build-arg TORCH_CUDA_CHANNEL=cu130.
+ARG TORCH_CUDA_CHANNEL=cu126
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ffmpeg \
+        python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# --ignore-installed: install fresh copies over the Debian-managed python
+# packages.
+RUN pip3 install --no-cache-dir --break-system-packages --ignore-installed \
+        --index-url https://download.pytorch.org/whl/${TORCH_CUDA_CHANNEL} \
+        "torch==2.11.0" torchvision torchcodec
+
+# lerobot[training] = dataset extras + accelerate + wandb; transformers is
+# required by SmolVLA's text backbone.
+RUN pip3 install --no-cache-dir --break-system-packages --ignore-installed \
+        "lerobot[training]==0.6.0" \
+        transformers
+
+# num2words: required by transformers' SmolVLM processor.
+RUN pip3 install --no-cache-dir --break-system-packages num2words
+
+CMD ["bash"]

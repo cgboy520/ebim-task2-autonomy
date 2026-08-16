@@ -1,0 +1,26 @@
+# Deployment image for `--policy vla`: the runner and a real LeRobot policy in
+# ONE container.
+#
+# Based on the trainer image: torch and lerobot versions match the training
+# environment, and ros:jazzy-ros-base underneath provides rclpy.
+FROM task2-trainer:latest
+
+# vision_msgs: official_run's self-verdict reads the live loose target bbox as
+# a Detection2DArray.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ros-jazzy-vision-msgs \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 install --no-cache-dir --break-system-packages loguru
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/opt/ebim-task2/src \
+    TORCH_HOME=/opt/ebim-task2/torch_home
+
+WORKDIR /opt/ebim-task2
+COPY src/ /opt/ebim-task2/src/
+
+# Pre-fetch the ImageNet ResNet18 backbone (ACT's image backbone) into the
+# image; no network fetch at runtime.
+RUN python3 -c "from torchvision.models import resnet18, ResNet18_Weights; resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)"
+
+CMD ["bash"]

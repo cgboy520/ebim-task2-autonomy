@@ -1,0 +1,1 @@
+{"0":{"class":"board"},"1":{"class":"target"},"2":{"class":"liner"},"3":{"class":"thermalpad"},"time_stamp":{"nanosec":700006034,"sec":115}}

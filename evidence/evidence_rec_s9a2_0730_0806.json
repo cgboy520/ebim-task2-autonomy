@@ -1,0 +1,33 @@
+{
+  "metric": "iou_pad_vs_target_current",
+  "iou_thermalpad_vs_target_current": 0.4955357142857143,
+  "is_orientation_correct": true,
+  "orientation_case": "both_liner_dominant",
+  "pad_source_label": "liner",
+  "intersection_area_pixels": 1665.0,
+  "union_area_pixels": 3360.0,
+  "pad_area_pixels": 1665.0,
+  "target_area_pixels": 3360.0,
+  "coverage_on_target": 0.4955357142857143,
+  "precision_on_pad": 1.0,
+  "pad_bbox": {
+    "x1": 595.0,
+    "y1": 280.0,
+    "x2": 640.0,
+    "y2": 317.0
+  },
+  "target_bbox": {
+    "x1": 578.0,
+    "y1": 271.0,
+    "x2": 648.0,
+    "y2": 319.0
+  },
+  "thermalpad_label": "thermalpad",
+  "liner_label": "liner",
+  "target_label": "target",
+  "thermalpad_label_id": 3,
+  "liner_label_id": 2,
+  "target_label_id": 1,
+  "current_frame_stamp": "111.866672500",
+  "bbox_frame_stamp": "111.883339168"
+}

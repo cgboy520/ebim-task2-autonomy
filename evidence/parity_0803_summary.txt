@@ -1,0 +1,22 @@
+# parity_0803 — live self-verdict vs official evaluate, NEW image (2c994f7)
+# one never-accept lay per iteration, official evaluate on that exact state,
+# then a reset through the fixed scene_reset (rc recorded).
+
+iterations      : 10
+reset ack lost  : 0 / 10
+replica cases   : [('both_thermalpad_dominant', 3), ('both_liner_dominant', 2), ('sideways', 2), ('aborted', 2), ('liner_only', 1)]
+official cases  : [('both_thermalpad_dominant', 3), ('both_liner_dominant', 3), ('sideways', 3), ('liner_only', 1)]
+
+parity pairs    : 8  (replica IoU shown GATED)
+   replica 0.0000 (both_thermalpad_dominant) official 0.0000 (both_thermalpad_dominant) case+gate agree
+   replica 0.2037 (both_liner_dominant     ) official 0.1957 (both_liner_dominant     ) case+gate agree
+   replica 0.0000 (sideways                ) official 0.0000 (sideways                ) case+gate agree
+   replica 0.0000 (both_thermalpad_dominant) official 0.0000 (both_thermalpad_dominant) case+gate agree
+   replica 0.0000 (sideways                ) official 0.0000 (sideways                ) case+gate agree
+   replica 0.0000 (both_thermalpad_dominant) official 0.0000 (both_thermalpad_dominant) case+gate agree
+   replica 0.8020 (liner_only              ) official 0.7992 (liner_only              ) case+gate agree
+   replica 0.5275 (both_liner_dominant     ) official 0.5222 (both_liner_dominant     ) case+gate agree
+case agreement  : 8/8
+gate agreement  : 8/8
+both scored     : n=3  mean official-minus-replica -0.0054  max |delta| 0.0080
+official scored>0: 3/8   IoUs ['0.196', '0.522', '0.799']

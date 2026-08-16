@@ -1,0 +1,1 @@
+{"0":{"class":"BACKGROUND"},"1":{"class":"UNLABELLED"},"2":{"class":"thermalpad"},"3":{"class":"target"},"4":{"class":"board"},"5":{"class":"liner"},"time_stamp":{"nanosec":250005958,"sec":114}}

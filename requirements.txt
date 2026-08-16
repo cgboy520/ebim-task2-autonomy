@@ -1,0 +1,9 @@
+# Core runtime deps (importable without ROS/GPU). Pin to versions that ship
+# with ROS Jazzy's Python 3.12 and stay compatible with 3.11+.
+numpy>=1.26,<3.0
+PyYAML>=6.0
+pydantic>=2.6,<3.0
+loguru>=0.7
+
+# Test/dev only (not required by the deployed image).
+pytest>=8.0

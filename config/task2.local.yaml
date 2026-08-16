@@ -1,0 +1,100 @@
+# EBiM Task 2 local run config — calibrated for the official Isaac Sim scene
+# (ebim-benchmark task2_isaacsim). This is the config docker-compose runs.
+control:
+  enabled: true
+  active_arm: right
+  publish_rate_hz: 10.0
+  use_sim_time: true             # ALL durations below are SIM seconds
+  joint_tolerance_rad: 0.035
+  waypoint_timeout_s: 30.0
+  verification_timeout_s: 8.0
+  # Sim-time safety bound only, not a scoring deadline.
+  max_episode_s: 150.0
+  # Raise both arms to the scene ready pose for ~2 s at startup so the base
+  # can drive.
+  travel_pose_on_start: true
+  # Joint limits from the official robot USD (deg -> rad).
+  safe_joint_limits_rad:
+    - [-2.901, 2.901]
+    - [-1.836, 1.836]
+    - [-2.901, 2.901]
+    - [-3.077, -0.117]
+    - [-2.876, 2.876]
+    - [0.440, 4.622]
+    - [-3.051, 3.051]
+
+# Direct, exclusive-control command topics (task2_isaacsim/config/topics.yaml).
+topics:
+  arm_state: /isaac/right_joint_states
+  arm_command: /isaac/right_joint_commands
+  gripper_command: /isaac/right_robotiq_joint_commands
+  semantic_image: /isaac/eval_camera/semantic_segmentation
+  clock: /isaac/clock
+
+# FALLBACK only — raw mask ids permute per session; the live
+# /isaac/eval_camera/semantic_labels payload is authoritative. official_run
+# never reads this block.
+semantic_ids:
+  thermalpad: 3
+  target: 4
+  liner: 5
+
+success_gate:
+  min_iou: 0.85
+  liner_dominance_ratio: 0.90
+
+# Eval camera (ROOM scene): 1280x720 top-down at (2.087, 1.885, 2.7), zero
+# rotation; +u -> +X, +v -> -Y (flip_y). Table top z=0.75, standoff 1.95 m.
+# pixel_scale = 1221.7 / 1.95 = 626.5 px/m.
+camera:
+  cx: 640.0
+  cy: 360.0
+  pixel_scale: 626.5
+  pixel_scale_plane_z_m: 0.75    # the table top this scale is stated at
+  origin_x_m: 2.087
+  origin_y_m: 1.885
+  flip_y: true
+
+# Robotiq driver joint `right_right_finger_joint`: 0.0 rad = open, 0.8 = closed.
+gripper:
+  open_rad: 0.0
+  closed_rad: 0.8
+
+# WORLD-frame z heights (arm-base calibration is on): table plane z = 0.75,
+# so grasp 2 cm above the pad and clearance 20 cm above the table.
+policy:
+  grasp_height_m: 0.77
+  clearance_height_m: 0.95
+  servo_iters: 12                # ee servo: tighter place refinement (~3 mm)
+  servo_tol_m: 0.003
+  servo_settle_tol_rad: 0.03     # settle gate: iterate only once tracked
+  servo_settle_timeout_s: 2.0    # (sim s)
+  grasp_close_dwell_s: 2.5       # (sim s) jaws close at depth while arm holds
+  release_dwell_s: 2.5           # (sim s) hold at place pose while jaws open
+  release_press_m: 0.005
+  release_wipe_m: 0.02
+  release_lift_m: 0.06
+  release_slow_step_rad: 0.012
+  release_timeout_s: 40.0        # (sim s)
+
+calibration:
+  enabled: true
+  samples: 20
+  max_translation_spread_m: 0.02
+  # ee_pose exists only when the scene runs with --record; without it the
+  # static fallback below is installed after timeout_s: arm base 0.353 m
+  # forward of base_link at the default height, for the default spawn
+  # (4.4, 2.6, yaw -90).
+  timeout_s: 10.0
+  fallback_translation: [4.75, 2.60, 0.51]
+  fallback_rotation_rpy: [0.0, 0.0, -1.5708]
+
+# Placeholders: config validation requires the five waypoints when
+# control.enabled is true, but the `perception` policy derives its goals from
+# the semantic mask at runtime and never reads them.
+waypoints:
+  pregrasp: [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+  grasp:    [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+  lift:     [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+  preplace: [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+  place:    [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]

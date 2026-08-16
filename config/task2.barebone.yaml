@@ -1,0 +1,141 @@
+# EBiM Task 2 — barebone scene config (dev validation on the ground-plane
+# scene; the competition room scene uses task2.local.yaml).
+control:
+  enabled: true
+  active_arm: right
+  publish_rate_hz: 10.0
+  use_sim_time: true             # ALL durations below are SIM seconds
+  joint_tolerance_rad: 0.08
+  waypoint_timeout_s: 30.0
+  verification_timeout_s: 20.0
+  max_episode_s: 500.0           # room for release + up to 3 push rounds
+  travel_pose_on_start: true
+  safe_joint_limits_rad:         # USD-authored FR3 limits (robot USD)
+    - [-2.901, 2.901]
+    - [-1.836, 1.836]
+    - [-2.901, 2.901]
+    - [-3.077, -0.117]
+    - [-2.876, 2.876]
+    - [0.440, 4.622]
+    - [-3.051, 3.051]
+
+topics:
+  arm_state: /isaac/right_joint_states
+  arm_command: /isaac/right_joint_commands
+  gripper_command: /isaac/right_robotiq_joint_commands
+  semantic_image: /isaac/eval_camera/semantic_segmentation
+  clock: /isaac/clock
+
+# Fallback ids only — the runner overrides these from
+# /isaac/eval_camera/semantic_labels at runtime (scene-instance dependent).
+semantic_ids:
+  thermalpad: 2
+  target: 3
+  liner: 5
+
+success_gate:
+  min_iou: 0.60                # early-success gate only
+  liner_dominance_ratio: 0.90
+
+# Barebone eval camera: (0.837, -0.065, 1.95) top-down; objects plane z≈0.
+# pixel_scale = fx / (cam_z - plane_z) = 1221.665 / 1.85 ≈ 660.6.
+camera:
+  cx: 640.0
+  cy: 360.0
+  pixel_scale: 660.6
+  origin_x_m: 0.837
+  origin_y_m: -0.065
+  flip_y: true
+  # Height-aware mapping (see CameraConfig): per-plane heights below;
+  # pixel_scale is referenced to plane z = 0.1006 m.
+  camera_height_m: 1.95
+  pixel_scale_plane_z_m: 0.1006
+  pad_plane_z_m: 0.100
+  target_plane_z_m: 0.0012
+  focal_px: 1221.665            # camera_info K[0]; used by the depth path,
+                                # which rescales per object height
+  depth_topic: /isaac/eval_camera/depth
+
+
+gripper:
+  open_rad: 0.0
+  closed_rad: 0.8
+
+policy:
+  grasp_mode: press              # press attach
+  # TCP offset 0.161 (motion._TCP_OFFSET_Z). Regrasps step 2 mm
+  # deeper; support clamp keeps the tip 5 mm clear of the resting surface.
+  grasp_depth_m: 0.006
+  grasp_depth_step_m: 0.002
+  grasp_depth_max_steps: 3
+  grasp_support_margin_m: 0.005
+  press_double_tap: false        # single press + hold
+  press_double_tap_lift_m: 0.02
+  press_slow_final_m: 0.06       # slow descent begins 6 cm above the sheet
+  grasp_height_m: 0.088          # FALLBACK only: with GT pad_points the press
+                                 # depth adapts to the sheet top (-6 mm, -1 mm
+                                 # per regrasp). This value is used only when
+                                 # the GT feed is absent.
+  place_height_m: 0.050          # carried assembly hangs ~2 cm below the
+                                 # fingertips
+  clearance_height_m: 0.25
+  servo_iters: 12                # ee servo: place refinement (~3 mm)
+  servo_tol_m: 0.003
+  servo_settle_tol_rad: 0.03     # settle gate: iterate only once tracked
+  servo_settle_timeout_s: 2.0    # (sim s)
+  grasp_close_dwell_s: 4.0       # (sim s) jaws closed at press depth while
+                                 # the arm holds the press-depth command
+  transport_step_rad: 0.012      # slow pad-carrying step
+  release_dwell_s: 2.5           # (sim s) hold at place pose while jaws open
+  release_press_m: 0.010         # gentle press (assembly touches the board)
+  release_twist_rad: 0.6         # twist-while-pressed, SLOT ONLY
+  release_wipe_m: 0.0            # lateral wipe, slot only
+  release_shake_cycles: 2        # shake cycles; whip_offset_xy assumes this
+                                 # release form
+  release_shake_amp_m: 0.04
+  release_tilt_rad: 0.0
+  release_lift_m: 0.03
+  release_timeout_s: 120.0       # (sim s) shared by RELEASE and each PUSH
+  push_enabled: true             # re-locate the dropped sheet and slide it
+                                 # edge-on onto the target (flat, liner up)
+  push_height_m: 0.02
+  push_settle_s: 6.0             # (sim s) let the sheet land + mask refresh
+  push_standoff_m: 0.08
+  push_stop_short_m: 0.055
+  whip_offset_xy: [0.022, -0.018] # drop-anchor offset for the twist-drag
+                                 # release
+  release_dump_enabled: false    # dump-armed re-shakes are escalation only
+                                 # (up to 3)
+  pin_enabled: false              # two-arm pin-and-peel: LEFT fingertip pins
+                                 # during the whip; launch dir (+0.42,-0.90)
+                                 # world — pin the taut side
+  pin_offset_xy: [0.012, -0.038]
+  pin_press_z: -0.008          # below-floor command = sustained PD press
+  pin_tilt_rad: 0.6              # lean finger away from sheet centre
+  pin_clear_z: 0.18
+  release_slow_step_rad: 0.012
+
+calibration:
+  enabled: true
+  samples: 20
+  max_translation_spread_m: 0.02
+  timeout_s: 6.0                 # (sim s) then fall back to the static transform
+  # Static fallback for the RIGHT arm base. R = Rz(yaw) @ Ry(pitch) @ Rx(roll).
+  fallback_translation: [0.49166, -0.04584, 0.50166]
+  fallback_rotation_rpy: [0.89453, -0.17441, 0.47297]
+
+# Waypoints are placeholders (unused by the perception policy; required by the
+# fail-closed config validation when enabled).
+waypoints:
+  pregrasp: [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+  grasp:    [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+  lift:     [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+  preplace: [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+  place:    [0.0, -0.4, 0.0, -2.4, 0.0, 1.6, 0.8]
+
+# Pad-geometry source. `gt` = record-mode ground-truth topic (bridge
+# interface topics.yaml `ground_truth:`). `depth` = eval camera.
+# `depth_with_gt_fallback` runs both.
+pad_source:
+  source: gt
+  compare_every: 0

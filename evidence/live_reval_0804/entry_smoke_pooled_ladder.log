@@ -1,0 +1,126 @@
+== official_run: up to 2 attempts, 25 min wall budget ==
+-- live evaluate: organizers' service reachable — its verdicts outrank the replica for the accept decision (warm-up verdict: both_liner_dominant 0.3803)
+-- loose target bbox stream live at startup: (291, 319, 564, 639)
+-- scene shape check OK: target bbox 75x28 px (wide axis: barebone)
+== official_run: attempt 1/2 ==
+!! id capture: ids not inferable (scene not in a clean start configuration?)
+!! attempt start: scene is not in a clean start configuration — resetting before spending the attempt
+-- semantic ids locked: {'thermalpad': 2, 'target': 4, 'liner': 5}
+  plate LOCKED (id 4, 709px): (0.8025,-0.0028) yaw +0.00 deg
+strip at rest: x 0.7457..0.8510 (105.3) y -0.3103..-0.2899 (20.4) z 0.0833..0.1017
+  liner-up confirmed on the pedestal (cyan 779px)
+-x overhang 13.8 mm, ends at z=0.0916; clamp exit x=0.7576, pad centre x=0.7441, bite 11.8 mm
+  base parked at (-0.0194,+0.0002) yaw=+0.000, err 0.7 mm (locked)
+  [arm base [ 0.4226 -0.0498  0.5008]]
+  .. over: no longer improving at 5.7 mm; moving on
+  over      pad=(0.7441,-0.2050,0.2500) miss=  5.7mm d=(-0.0,+4.5,-3.5) q_err=0.012(j4) ik=0mm corr=(+2,+1,+4) base=(0.420,-0.047,0.501) | x 0.7457..0.8510 (105.3) y -0.3103..-0.2899 (20.4) z 0.0833..0.1017
+            base_link=(-0.0221,+0.0007,-0.0000) yaw=+0.00469  spine=0.0
+  align     pad=(0.7441,-0.2050,0.1240) miss=  1.0mm d=(-0.5,-0.3,-0.7) q_err=0.007(j1) ik=0mm corr=(+2,+2,+4) base=(0.421,-0.047,0.501) | x 0.7457..0.8510 (105.3) y -0.3103..-0.2899 (20.4) z 0.0833..0.1017
+            base_link=(-0.0214,+0.0012,-0.0000) yaw=+0.00453  spine=0.0
+  .. insert: no longer improving at 2.0 mm; moving on
+  insert    pad=(0.7441,-0.3000,0.1240) miss=  2.0mm d=(-2.0,+0.1,+0.2) q_err=0.004(j1) ik=0mm corr=(+3,+2,+1) base=(0.418,-0.049,0.501) | x 0.7443..0.8489 (104.6) y -0.3181..-0.2897 (28.4) z 0.0829..0.1029
+            base_link=(-0.0238,-0.0006,-0.0000) yaw=+0.00437  spine=0.0
+  scoop     pad=(0.7441,-0.3000,0.1470) miss=  1.3mm d=(+0.2,+0.1,-1.3) q_err=0.009(j4) ik=0mm corr=(+2,+1,+0) base=(0.419,-0.048,0.501) | x 0.7510..0.8522 (101.2) y -0.3158..-0.2891 (26.7) z 0.0880..0.1181
+            base_link=(-0.0234,-0.0002,-0.0000) yaw=+0.00438  spine=0.0
+  close     pad=(0.7441,-0.3000,0.1470) miss=  0.6mm d=(+0.2,+0.1,-0.6) q_err=0.007(j4) ik=0mm corr=(+2,+1,+0) base=(0.419,-0.048,0.501) | x 0.7434..0.8522 (108.8) y -0.3159..-0.2891 (26.8) z 0.0881..0.1131
+            base_link=(-0.0234,-0.0003,-0.0000) yaw=+0.00438  spine=0.0
+  lift      pad=(0.7441,-0.3000,0.2300) miss=  0.5mm d=(+0.3,+0.0,-0.4) q_err=0.005(j4) ik=0mm corr=(-0,-2,+0) base=(0.419,-0.049,0.501) | x 0.7425..0.7591 ( 16.6) y -0.3156..-0.2909 (24.7) z 0.1160..0.2309
+            base_link=(-0.0237,-0.0005,-0.0000) yaw=+0.00431  spine=0.0
+  grip CONFIRMED: strip rose to z 0.1160..0.2309 (hang 114.4 mm, so the live bite is 5.6 mm)
+  reconf    pad=(0.7441,-0.3000,0.2800) miss=  1.3mm d=(-0.1,+0.3,-1.2) q_err=0.008(j4) ik=0mm corr=(+1,+1,-0) base=(0.418,-0.049,0.501) | x 0.7436..0.7599 ( 16.3) y -0.3140..-0.2904 (23.6) z 0.1667..0.2815
+            base_link=(-0.0237,-0.0005,-0.0000) yaw=+0.00435  spine=0.0
+  mirror: skipping the reconfiguration (placing at the grip yaw)
+  flip      pad=(0.7441,-0.3000,0.2800) miss=  0.8mm d=(-0.0,+0.3,-0.8) q_err=0.006(j4) ik=0mm corr=(+1,+1,-0) base=(0.419,-0.049,0.501) | x 0.7437..0.7592 ( 15.5) y -0.3140..-0.2908 (23.2) z 0.1661..0.2809
+            base_link=(-0.0236,-0.0004,-0.0000) yaw=+0.00434  spine=0.0
+  hanging length measured 113.8 mm (clamp z=0.2779); arc radius 111.8 mm
+  preride   pad=(0.7441,-0.3000,0.3450) miss=  1.3mm d=(+0.4,+0.5,-1.1) q_err=0.008(j4) ik=0mm corr=(+1,+2,-0) base=(0.418,-0.049,0.501) | x 0.7431..0.7589 ( 15.8) y -0.3132..-0.2898 (23.3) z 0.2313..0.3462
+            base_link=(-0.0238,-0.0005,-0.0000) yaw=+0.00437  spine=0.0
+  advancing the base to (+0.100,+0.320) for the place reach
+  [base_goto A 0.18s: (-0.024,-0.001) -> (-0.023,+0.005) yaw=+0.000]
+  [base_goto A 0.18s: (-0.023,+0.005) -> (-0.023,+0.030) yaw=-0.000]
+  [base_goto A 0.18s: (-0.023,+0.030) -> (-0.023,+0.091) yaw=-0.000]
+  [base_goto A 0.15s: (-0.023,+0.091) -> (-0.023,+0.182) yaw=+0.000]
+  [base_goto B 0.09s: (-0.023,+0.182) -> (-0.023,+0.192) yaw=+0.000]
+  [base_goto B 0.05s: (-0.023,+0.192) -> (-0.022,+0.154) yaw=-0.001]
+  [base_goto B 0.05s: (-0.022,+0.154) -> (-0.022,+0.111) yaw=-0.001]
+  base parked at (-0.0220,+0.1103) yaw=-0.001, err 16.6 mm (locked)
+  [base_goto A 0.18s: (-0.022,+0.110) -> (-0.023,+0.102) yaw=-0.000]
+  [base_goto A 0.18s: (-0.023,+0.102) -> (-0.021,+0.215) yaw=+0.000]
+  [base_goto A 0.16s: (-0.021,+0.215) -> (-0.020,+0.320) yaw=+0.001]
+  [base_goto B 0.09s: (-0.020,+0.320) -> (-0.020,+0.332) yaw=+0.001]
+  [base_goto B 0.05s: (-0.020,+0.332) -> (-0.020,+0.297) yaw=+0.001]
+  [base_goto B 0.05s: (-0.020,+0.297) -> (-0.020,+0.255) yaw=+0.003]
+  base parked at (-0.0196,+0.2538) yaw=+0.003, err 1.3 mm (locked)
+  [base_goto FWD 0.18s: (-0.020,+0.253) -> (-0.021,+0.244) yaw=+0.008]
+  [base_goto FWD 0.18s: (-0.021,+0.244) -> (+0.007,+0.245) yaw=+0.008]
+  [base_goto FWD 0.18s: (+0.007,+0.245) -> (+0.065,+0.247) yaw=+0.009]
+  [base_goto A 0.18s: (+0.065,+0.247) -> (+0.074,+0.252) yaw=+0.006]
+  [base_goto A 0.18s: (+0.074,+0.252) -> (+0.074,+0.274) yaw=+0.007]
+  [base_goto A 0.18s: (+0.074,+0.274) -> (+0.074,+0.339) yaw=+0.007]
+  [base_goto FWD 0.13s: (+0.074,+0.339) -> (+0.074,+0.345) yaw=+0.007]
+  [base_goto FWD 0.14s: (+0.074,+0.345) -> (+0.127,+0.351) yaw=+0.011]
+  [base_goto B 0.16s: (+0.127,+0.351) -> (+0.132,+0.355) yaw=+0.015]
+  [base_goto B 0.18s: (+0.132,+0.355) -> (+0.131,+0.332) yaw=+0.014]
+  [base_goto BACK 0.13s: (+0.131,+0.332) -> (+0.123,+0.332) yaw=+0.013]
+  [base_goto BACK 0.10s: (+0.123,+0.332) -> (+0.094,+0.329) yaw=+0.017]
+  !! base_goto gave up at (+0.0940,+0.3288) yaw=+0.017 (err 11 mm)
+  base parked at (+0.0929,+0.3287) yaw=+0.017, err 11.2 mm (locked)
+  [arm base [0.5312 0.2818 0.5009]]
+  streaming origin reset to the ridden tool position (0.859,+0.033,0.343)
+  drape v-offset +19.4 mm; shifting the clamp aim to v=-0.0194
+  laid length 120.0 mm (arc radius 111.8, measured bite 11.8); anchor u=+0.0560 world (0.8585,-0.0028) yaw +0.0 deg
+  carry     pad=(0.8450,-0.0223,0.2300) miss=  1.1mm d=(-0.6,-0.4,+0.8) q_err=0.009(j1) ik=0mm corr=(+2,+2,+4) base=(0.532,0.282,0.501) | x 0.8542..0.8637 (  9.4) y -0.0178..0.0133 (31.1) z 0.1104..0.2338
+            base_link=(+0.0892,+0.3270,+0.0000) yaw=+0.01224  spine=1e-05
+  base parked at (+0.0892,+0.3270) yaw=+0.012, err 12.8 mm (locked)
+  [arm base [0.5316 0.2839 0.5009]]
+  anchor    glide-converged miss=  7.1mm d=(+0.6,+1.8,-6.8) base_link=(+0.0889,+0.3266) yaw=+0.017 | x 0.8462..0.8608 ( 14.6) y -0.0200..0.0135 (33.5) z 0.0015..0.1134
+  anchored: free end (u+0.0585,v+0.0063) from 402 board points, want (u+0.0560,v+0.0000) -> miss (-2.5,-6.3) mm
+  .. anchor lateral miss -6.3 mm trips the 4 mm gate with retries left; peeling and re-landing instead of burning the draw
+  retrying the touchdown from clamp (u+0.0390,v-0.0232)
+  .. relift0: no longer improving at 3.8 mm; moving on
+  relift0   pad=(0.8415,-0.0261,0.2300) miss=  3.8mm d=(-2.7,-2.5,-1.0) q_err=0.007(j4) ik=0mm corr=(+3,+2,+4) base=(0.532,0.284,0.501) | x 0.8531..0.8623 (  9.2) y -0.0178..0.0141 (31.9) z 0.1115..0.2353
+            base_link=(+0.0890,+0.3267,+0.0000) yaw=+0.01695  spine=1e-05
+  base parked at (+0.0890,+0.3267) yaw=+0.017, err 12.9 mm (locked)
+  [arm base [0.5315 0.2851 0.5009]]
+  anchor1   glide-converged miss=  7.5mm d=(-2.5,-5.8,-4.1) base_link=(+0.0884,+0.3259) yaw=+0.030 | x 0.8493..0.8625 ( 13.3) y -0.0134..0.0203 (33.6) z 0.0014..0.1135
+  anchored: free end (u+0.0601,v+0.0131) from 402 board points, want (u+0.0560,v+0.0000) -> miss (-4.1,-13.1) mm
+  .. anchor lateral miss -13.1 mm trips the 4 mm gate with retries left; peeling and re-landing instead of burning the draw
+  retrying the touchdown from clamp (u+0.0366,v-0.0311)
+  relift1   pad=(0.8391,-0.0339,0.2300) miss=  1.4mm d=(+0.1,+0.8,-1.1) q_err=0.007(j4) ik=0mm corr=(+2,+2,+1) base=(0.532,0.290,0.501) | x 0.8464..0.8568 ( 10.4) y -0.0242..0.0010 (25.3) z 0.1117..0.2349
+            base_link=(+0.0887,+0.3265,+0.0000) yaw=+0.03152  spine=1e-05
+  base parked at (+0.0887,+0.3265) yaw=+0.032, err 13.0 mm (locked)
+  [arm base [0.5318 0.2926 0.5009]]
+  anchor2   glide-converged miss=  2.3mm d=(+1.1,-0.3,+2.0) base_link=(+0.0878,+0.3251) yaw=+0.055 | x 0.8434..0.8619 ( 18.5) y -0.0214..0.0091 (30.6) z 0.0016..0.1113
+  anchored: free end (u+0.0595,v+0.0019) from 402 board points, want (u+0.0560,v+0.0000) -> miss (-3.5,-1.9) mm
+  re-centring the arc on the measured anchor u=+0.0595
+  arc80     glide-converged miss=  3.8mm d=(-0.6,+3.0,+2.3) base_link=(+0.0879,+0.3251) yaw=+0.055 | x 0.8378..0.8622 ( 24.4) y -0.0115..0.0106 (22.1) z 0.0012..0.1136
+  arc70     glide-converged miss=  2.3mm d=(-2.0,+0.8,+0.6) base_link=(+0.0879,+0.3251) yaw=+0.055 | x 0.8191..0.8613 ( 42.2) y -0.0109..0.0109 (21.8) z 0.0013..0.1097
+  arc60     glide-converged miss=  1.7mm d=(-1.5,+0.8,+0.2) base_link=(+0.0878,+0.3251) yaw=+0.055 | x 0.8014..0.8605 ( 59.2) y -0.0111..0.0110 (22.0) z 0.0016..0.1016
+  arc50     glide-converged miss=  1.7mm d=(-1.5,+0.7,-0.4) base_link=(+0.0878,+0.3251) yaw=+0.055 | x 0.7847..0.8585 ( 73.8) y -0.0119..0.0116 (23.5) z 0.0024..0.0905
+  arc40     glide-converged miss=  2.2mm d=(-1.6,+0.7,-1.2) base_link=(+0.0878,+0.3251) yaw=+0.055 | x 0.7712..0.8571 ( 85.9) y -0.0119..0.0120 (23.9) z 0.0024..0.0775
+  arc32     glide-converged miss=  3.6mm d=(-2.0,+0.2,-3.0) base_link=(+0.0879,+0.3251) yaw=+0.056 | x 0.7633..0.8562 ( 92.9) y -0.0118..0.0135 (25.2) z 0.0024..0.0675
+  arc release point (30 deg) reached; dropping the rest from here
+  tray-lay: part-opened at z=0.060; paying the tail out | x 0.7629..0.8560 ( 93.1) y -0.0119..0.0152 (27.1) z 0.0024..0.0673
+  tray-lay: ramped to (x 0.7297, z 0.037) | x 0.7617..0.8559 ( 94.2) y -0.0119..0.0122 (24.1) z 0.0024..0.0667
+  released in place | x 0.7743..0.8543 ( 80.0) y -0.0100..0.0462 (56.2) z 0.0004..0.0566
+  [arm base [0.5381 0.3486 0.506 ]]
+  slid off the strip end | x 0.7726..0.8542 ( 81.6) y -0.0104..0.0505 (60.9) z 0.0003..0.0563
+  slow shed to z=0.067 | x 0.7690..0.8541 ( 85.1) y -0.0106..0.0444 (54.9) z 0.0001..0.0370
+  slow shed to z=0.097 | x 0.7672..0.8539 ( 86.7) y -0.0105..0.0395 (50.1) z 0.0004..0.0123
+  jaws full-open at z=0.097 (slot un-threaded) | x 0.7674..0.8541 ( 86.7) y -0.0108..0.0398 (50.6) z 0.0003..0.0121
+  slow shed to z=0.127 | x 0.7402..0.8340 ( 93.8) y -0.0049..0.0832 (88.1) z 0.0001..0.0105
+  !! shed TOWED the strip 34 mm (-24,+25)
+  sidestep tow-gate: pad centroid moved 14 mm after +50 mm; stopping the sidestep here
+  sidestep +50 mm toward the base at z=0.127 (TOWED 14 mm!) | x 0.7389..0.8184 ( 79.5) y 0.0086..0.0919 (83.3) z -0.0002..0.0197
+  guard climb to z=0.157 | x 0.7375..0.8121 ( 74.6) y 0.0143..0.1031 (88.8) z 0.0005..0.0203
+  guard climb to z=0.187 | x 0.7375..0.8119 ( 74.5) y 0.0142..0.1035 (89.2) z 0.0005..0.0202
+  guard climb to z=0.217 | x 0.7372..0.8120 ( 74.8) y 0.0142..0.1051 (90.9) z 0.0008..0.0201
+  lifted straight to z=0.230 | x 0.7372..0.8120 ( 74.8) y 0.0142..0.1051 (90.9) z 0.0008..0.0201
+
+final strip: x 0.7372..0.8120 ( 74.8) y 0.0142..0.1051 (90.9) z 0.0008..0.0201
+target AABB x 0.7425..0.8625, y -0.0128..+0.0072 (yaw +0.0 deg)
+final target AABB px (578.3,312.6,653.3,325.4)
+crude bbox IoU estimate 0.000
+-- live loose target bbox (253, 311, 566, 628) outranks the chain's tracked (313, 325, 578, 653) (plate moved post-track)
+-- attempt 1: official evaluate both_liner_dominant, raw IoU 0.7008
+== official_run: accepting gated IoU 0.7008; scene left in its scored state ==

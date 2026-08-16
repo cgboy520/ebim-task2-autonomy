@@ -1,0 +1,16 @@
+services:
+  policy:
+    build: .
+    image: ebim-task2-autonomy:latest
+    network_mode: host
+    ipc: host
+    volumes:
+      - ./config:/opt/ebim-task2/config:ro
+      - ./artifacts:/opt/ebim-task2/artifacts
+    environment:
+      RMW_IMPLEMENTATION: ${RMW_IMPLEMENTATION:-rmw_fastrtps_cpp}
+      FASTDDS_BUILTIN_TRANSPORTS: ${FASTDDS_BUILTIN_TRANSPORTS:-UDPv4}
+      ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-0}
+    command: ["python3", "-m", "ebim_task2.runner",
+              "--config", "/opt/ebim-task2/config/task2.local.yaml",
+              "--policy", "${POLICY:-waypoint}"]

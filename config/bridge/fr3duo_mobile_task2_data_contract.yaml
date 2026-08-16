@@ -1,0 +1,32 @@
+# Task 2 embodiment contract read by
+# task2_isaacsim/scripts/isaacsim_fr3duo_teleop_bridge_core.py::_load_joint_groups.
+# Same schema as task1_isaacsim/assets/embodiments/fr3duo_mobile/data_contract.yaml,
+# with the Task 2 vertical spine appended to the RIGHT arm command group; the
+# spine target then arrives over /isaac/right_joint_commands alongside the arm
+# targets.
+embodiment_key: fr3duo_mobile_task2
+state_structure:
+  arms:
+    left:
+      arm_id: 0
+      joint_count: 7
+      joint_names:
+        - left_fr3v2_joint1
+        - left_fr3v2_joint2
+        - left_fr3v2_joint3
+        - left_fr3v2_joint4
+        - left_fr3v2_joint5
+        - left_fr3v2_joint6
+        - left_fr3v2_joint7
+    right:
+      arm_id: 1
+      joint_count: 8
+      joint_names:
+        - right_fr3v2_joint1
+        - right_fr3v2_joint2
+        - right_fr3v2_joint3
+        - right_fr3v2_joint4
+        - right_fr3v2_joint5
+        - right_fr3v2_joint6
+        - right_fr3v2_joint7
+        - franka_spine_vertical_joint
